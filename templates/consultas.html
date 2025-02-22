@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultas Totais</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Consultas Totais</h1>
+
+        <h2>Totais por Pessoa</h2>
+        <ul class="lista-pessoas">
+            {% for total in totais %}
+                <li class="item-pessoa">
+                    <strong>{{ total.pessoa }}</strong> -
+                    <span class="receitas">Receitas: R$ {{ total.receitas }}</span> -
+                    <span class="despesas">Despesas: R$ {{ total.despesas }}</span> -
+                    <span class="saldo">Saldo: R$ {{ total.saldo }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <h2>Total Geral</h2>
+        <div class="total-geral">
+            <p><strong>Total de Receitas:</strong> R$ {{ totais_gerais.total_receitas }}</p>
+            <p><strong>Total de Despesas:</strong> R$ {{ totais_gerais.total_despesas }}</p>
+            <p class="saldo-liquido"><strong>Saldo Líquido:</strong> R$ {{ totais_gerais.saldo_liquido }}</p>
+        </div>
+    </div>
+</body>
+</html>

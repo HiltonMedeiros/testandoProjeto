@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Pessoas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body>
+    <h1>Controle de Gastos Residenciais</h1>
+    <a href="{{ url_for('nova_pessoa') }}">Nova Pessoa</a>
+    <a href="{{ url_for('nova_transacao') }}">Nova Transação</a>
+    <a href="{{ url_for('consultas') }}">Consultas Gerais</a>
+
+<h2>Pessoas Cadastradas</h2>
+<ul>
+    {% for pessoa in pessoas %}
+        <li>
+            <strong>ID:</strong> {{ pessoa.id }} |
+            <strong>Nome:</strong> {{ pessoa.nome }} |
+            <strong>Idade:</strong> {{ pessoa.idade }} anos
+            <form action="{{ url_for('deletar_pessoa', pessoa_id=pessoa.id) }}" method="POST" style="display:inline;">
+                <button type="submit" onclick="return confirm('Tem certeza que deseja excluir {{ pessoa.nome }}?')">
+                    Excluir
+                </button>
+            </form>
+        </li>
+        <ul>
+            {% for transacao in pessoa.transacoes %}
+                <li>
+                    <strong>Descrição:</strong> {{ transacao.descricao }} |
+                    <strong>Valor:</strong> R$ {{ transacao.valor }} |
+                    <strong>Tipo:</strong> {{ transacao.tipo }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+</ul>
+
+
+</body>
+</html>
